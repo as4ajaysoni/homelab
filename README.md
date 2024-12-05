@@ -24,7 +24,19 @@ pyinfra helidon infra/basic_setup.py
 
 ## Install Docker
 
+
 ```bash
+curl -sSL https://get.docker.com | sh
+sudo usermod -aG docker $(whoami)
+exit
+
+# OR 
+
+sudo apt install docker.io
+
+
+
+OR
 
 # Maintained by Docker
 sudo apt install docker-ce docker-ce-cli containerd.io -y
