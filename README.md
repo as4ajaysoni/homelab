@@ -73,6 +73,12 @@ docker compose -f portainer.docker-compose.yml up -d
 
 ---
 
+## HACS Setup under Home Assistant:
+docker ps
+docker exec -it [CONTAINER_NAME] bash
+wget -O - https://get.hacs.xyz | bash -
+docker restart [CONTAINER_NAME]
+
 ### Development Notes
 
 ```bash
