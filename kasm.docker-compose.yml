@@ -1,0 +1,17 @@
+services:
+  kasm:
+    image: lscr.io/linuxserver/kasm:arm64v8-latest
+    container_name: kasm
+    privileged: true
+    environment:
+      - KASM_PORT=443
+    volumes:
+      - /mnt/wd1tb/portainer/kasm_opt:/opt
+      - /mnt/wd1tb/portainer/kasm_profiles:/profiles
+      - /mnt/wd1tb/portainer/kasm_dev/input:/dev/input
+      - /mnt/wd1tb/portainer/kasm_run/udev/data:/run/udev/data
+    ports:
+      - 3000:3000
+      - 7453:443
+    restart: unless-stopped
+    shm_size: 2g
