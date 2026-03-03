@@ -44,11 +44,6 @@ Note: At the end of installation, Kasm will display generated credentials. Save 
 - Admin: admin@kasm.local / generated password
 - User: user@kasm.local / generated password
 
-## Step 4: Restart Caddy
-
-```bash
-sudo docker start caddy-internal
-```
 
 ## Step 5: Useful Aliases (Optional)
 
