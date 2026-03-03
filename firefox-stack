@@ -1,0 +1,18 @@
+services:
+  firefox:
+    image: lscr.io/linuxserver/firefox:latest
+    container_name: firefox
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+      - FF_CUSTOM_ARGS=--no-sandbox
+    volumes:
+      - /mnt/wd1tb/portainer/firefox_config:/config
+    ports:
+      - 4000:3000
+      - 4001:3001
+    shm_size: "1gb"
+    restart: unless-stopped
