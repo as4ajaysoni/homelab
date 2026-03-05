@@ -4,7 +4,7 @@ services:
     image: ghcr.io/home-assistant/home-assistant:stable
     restart: unless-stopped
     privileged: true
-    network_mode: host
+    network_mode: host  # HA needs direct access : mDNS/ZeroConf, UPnP/SSDP, WS-Discovery (Windows IoT), Bluetooth/Zigbee
     environment:
       - TZ=Asia/Kolkata        # Change to your timezone
     volumes:
