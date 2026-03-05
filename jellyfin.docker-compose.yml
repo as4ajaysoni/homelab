@@ -20,7 +20,7 @@ services:
     volumes:
       - ./jellyfin_config:/config
       - ./jellyfin_cache:/cache
-      - /mnt/wd1tb:/srv/wd1tb
+      - /mnt/wd1tb:/downloads
       # - type: bind
       #   source: ./media
       #   target: /media
