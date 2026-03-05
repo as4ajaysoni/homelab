@@ -1,5 +1,41 @@
 # homelab
 
+
+## Raspberry Pi SD Card Life Optimization
+
+Reduces SD card wear by configuring systemd journald to store logs in RAM instead of disk.
+
+### What This Does
+
+- **Storage=volatile** - Stores journal logs in RAM only (lost on reboot)
+- **SystemMaxUse=50M** - Limits journal size to 50MB
+- **Compress=yes** - Compresses older logs to save space
+- **SyncIntervalSec=1m** - Reduces disk sync frequency
+
+### Usage
+
+Run the setup script:
+
+```bash
+sudo ./sd-card-optimize.sh
+```
+
+Reboot to apply changes.
+
+### Optional: Move /var/log to tmpfs
+
+For additional SD card protection, add tmpfs for logs:
+
+```bash
+sudo tee -a /etc/fstab > /dev/null << 'EOF'
+tmpfs   /var/log   tmpfs   defaults,noatime,size=50M   0 0
+```
+
+> **Warning**: Logs will be lost on reboot. Only use if you don't need persistent logging.
+
+
+
+
 ## Install Docker
 
 
