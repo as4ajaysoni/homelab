@@ -1,17 +1,80 @@
+# Kasm on Raspberry Pi 4 — Setup Guide
+
+## Step 1 — Create Swap Space
+
+Kasm recommends 1GB swap per concurrent session. SSH into your Pi and run:
+
+```bash
+sudo dd if=/dev/zero bs=1M count=4096 of=/mnt/4GiB.swap
+sudo chmod 600 /mnt/4GiB.swap
+sudo mkswap /mnt/4GiB.swap
+sudo swapon /mnt/4GiB.swap
+
+# Make it persistent across reboots
+echo '/mnt/4GiB.swap none swap sw 0 0' | sudo tee -a /etc/fstab
+```
+
+---
+
+## Step 2 — Deploy Kasm in Portainer
+
+In Portainer, go to **Stacks → Add Stack**, name it `kasm`, and paste this compose:
+
+```yaml
 services:
   kasm:
-    image: lscr.io/linuxserver/kasm:arm64v8-latest
+    image: lscr.io/linuxserver/kasm:latest
     container_name: kasm
     privileged: true
+    security_opt:
+      - apparmor:rootlesskit
     environment:
-      - KASM_PORT=443
+      - KASM_PORT=8443
     volumes:
-      - /mnt/wd1tb/portainer/kasm_opt:/opt
-      - /mnt/wd1tb/portainer/kasm_profiles:/profiles
-      - /mnt/wd1tb/portainer/kasm_dev/input:/dev/input
-      - /mnt/wd1tb/portainer/kasm_run/udev/data:/run/udev/data
+      - /opt/kasm/data:/opt
+      - /opt/kasm/profiles:/profiles
+      - /dev/input:/dev/input
+      - /run/udev/data:/run/udev/data
     ports:
       - 3000:3000
-      - 7453:443
+      - 8443:443
     restart: unless-stopped
-    shm_size: 2g
+```
+
+> 💡 `KASM_PORT` and **both sides** of the port mapping must match. The LinuxServer image is ARM64-compatible and pulls automatically for your Pi.
+
+Click **Deploy the Stack**.
+
+---
+
+## Step 3 — First Boot
+
+The first run downloads workspace images — this can take **5–10 minutes**. Monitor progress in Portainer under the container's **Logs** tab.
+
+---
+
+## Step 4 — Run the Setup Wizard
+
+Once the container is up, open your browser and go to:
+
+```
+https://<raspberry-pi-ip>:3000
+```
+
+Complete the installation wizard here. After setup, Kasm will be available at:
+
+```
+https://<raspberry-pi-ip>:8443
+```
+
+> ⚠️ You'll see a self-signed certificate warning — click **Advanced → Proceed**. This is expected.
+
+---
+
+## Step 5 — Log In
+
+| Field    | Value                        |
+|----------|------------------------------|
+| URL      | `https://<ip>:8443`          |
+| Username | `admin@kasm.local`           |
+| Password | Set during the setup wizard  |
