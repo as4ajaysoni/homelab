@@ -1,0 +1,35 @@
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    # image: jellyfin/jellyfin:10
+    container_name: jellyfin
+    # user: uid:gid
+    environment:
+      - TZ=Asia/Kolkata
+      - PUID=1000
+      - PGID=1000
+      # Optional - alternative address used for autodiscovery
+      # - JELLYFIN_PublishedServerUrl=http://zzz.com
+    dns:
+      - 8.8.8.8
+    ports:
+      - 8096:8096
+      - 8920:8920 # optional
+      - 7359:7359/udp # optional
+      - 1900:1900/udp # optional
+    volumes:
+      - ./jellyfin_config:/config
+      - ./jellyfin_cache:/cache
+      - /mnt/wd1tb:/srv/wd1tb
+      # - type: bind
+      #   source: ./media
+      #   target: /media
+      # read_only: true
+    restart: "unless-stopped"
+    networks:
+      - web
+
+networks:
+  web:
+    name: web
+    external: true
