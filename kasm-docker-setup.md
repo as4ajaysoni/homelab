@@ -33,8 +33,8 @@ services:
       - /run/udev/data:/run/udev/data
     ports:
       - 3000:3000
-      - 8443:443
-    restart: unless-stopped
+      - 8443:8443
+    restart: unless-stopped # Consider restart: no and starting it manually when needed
 ```
 
 > 💡 `KASM_PORT` and **both sides** of the port mapping must match. The LinuxServer image is ARM64-compatible and pulls automatically for your Pi.
