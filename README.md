@@ -1,27 +1,5 @@
 # homelab
 
-
-
-## Install PyInfra
-
-```bash
-
-pip install pyinfra
-
-pyinfra server_name deploy.py
-pyinfra server_name exec -- echo "hello world"
-
-```
-
-## Basic Setup
-
-```bash
-
-pyinfra helidon infra/basic_setup.py
-
-```
-
-
 ## Install Docker
 
 
@@ -69,6 +47,52 @@ sudo systemctl enable docker --now
 docker compose -f portainer.docker-compose.yml up -d
 
 ```
+
+
+## Mount external drive on startup
+
+1. Identify UUID
+```bash
+sudo blkid /dev/sda1
+```
+Copy the `UUID="..."` value (e.g., `UUID="1234-abcd-..."`).
+
+2. Backup and edit fstab
+```bash
+sudo cp /etc/fstab /etc/fstab.bak  # Backup first!
+sudo nano /etc/fstab
+```
+
+Add this line at the end (replace UUID and path as needed):
+```
+# External 1TB drive (sda1) - added [date]
+UUID="PUT-YOUR-UUID-HERE" /mnt/wd1tb ext4 defaults,nofail 0 2
+```
+- `nofail`: Allows boot if drive unplugged.
+- Save (Ctrl+O, Enter, Ctrl+X).
+
+3. Test
+```bash
+sudo mount -a  # No errors? Good.
+df -h /mnt/wd1tb  # Verify mounted.
+```
+4. Reboot test
+```bash
+sudo reboot
+```
+Drive should auto-mount at `/mnt/wd1tb`.
+```
+
+
+## Basic Setup
+
+```bash
+
+pyinfra helidon infra/basic_setup.py
+
+```
+
+
 
 
 ---
