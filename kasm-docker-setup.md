@@ -16,9 +16,7 @@ echo '/mnt/4GiB.swap none swap sw 0 0' | sudo tee -a /etc/fstab
 
 ---
 
-## Step 2 — Deploy Kasm in Portainer
-
-In Portainer, go to **Stacks → Add Stack**, name it `kasm`, and paste this compose:
+## Step 2 — Deploy Kasm
 
 ```yaml
 services:
@@ -26,8 +24,6 @@ services:
     image: lscr.io/linuxserver/kasm:latest
     container_name: kasm
     privileged: true
-    security_opt:
-      - apparmor:rootlesskit
     environment:
       - KASM_PORT=8443
     volumes:
