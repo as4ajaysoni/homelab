@@ -18,9 +18,10 @@ services:
       - 7359:7359/udp # optional
       - 1900:1900/udp # optional
     volumes:
-      - ./jellyfin_config:/config
-      - ./jellyfin_cache:/cache
-      - /mnt/wd1tb:/downloads
+      - /home/<USER>/docker-data/jellyfin_config:/config  # Replace USER with actual path
+      - /mnt/<DRIVE>/docker-data/jellyfin_cache:/cache    # Replace DRIVE with actual path
+      - /mnt/<DRIVE>/Movies:/data/movies                  # Replace DRIVE with actual path
+      - /mnt/<DRIVE>/Shows:/data/tvshows                  # Replace DRIVE with actual path
       # - type: bind
       #   source: ./media
       #   target: /media
