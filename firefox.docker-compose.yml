@@ -10,7 +10,7 @@ services:
       - TZ=Asia/Kolkata
       - FF_CUSTOM_ARGS=--no-sandbox
     volumes:
-      - /mnt/wd1tb/portainer/firefox_config:/config
+      - /home/<USER>/docker-data/firefox_config:/config
     ports:
       - 4000:3000
       - 4001:3001
