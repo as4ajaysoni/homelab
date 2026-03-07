@@ -139,7 +139,40 @@ docker exec -it [CONTAINER_NAME] bash
 wget -O - https://get.hacs.xyz | bash -
 docker restart [CONTAINER_NAME]
 
-### Development Notes
+## Ricoh SP 111 — Printer Driver Setup on Raspberry Pi
+
+#### 1. Install Required Packages
+
+
+
+```bash
+sudo apt install printer-driver-gutenprint
+sudo apt install openprinting-ppds
+sudo apt install usbutils
+lsusb #to confirm USB detection
+```
+
+#### 2. Restart CUPS
+
+#### 3. Add Printer via CUPS Web Interface
+
+```
+http://<ip>:631
+```
+
+Then follow these steps:
+
+1. Go to **Administration** → **Add Printer**
+2. Log in with your username and password
+3. Select your Ricoh printer from the USB devices list
+4. Click **Continue**
+5. Fill in Name, Description, and Location → **Continue**
+
+4. Choose Make and Model
+> **Make:** Ricoh
+> **Model:** `SP 112 Foomatic/foo2ddst`
+
+## Misc
 
 ```bash
 
