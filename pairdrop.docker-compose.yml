@@ -1,0 +1,15 @@
+services:
+  pairdrop:
+    image: lscr.io/linuxserver/pairdrop:latest
+    container_name: pairdrop
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - RATE_LIMIT=false       # Set true to enable rate limiting
+      - WS_FALLBACK=false      # Set true if behind a reverse proxy that doesn't support WebSockets
+      - RTC_CONFIG=            # Optional: path to custom WebRTC config JSON
+      - DEBUG_MODE=false
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
