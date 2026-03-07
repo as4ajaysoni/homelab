@@ -11,5 +11,5 @@ services:
       - RTC_CONFIG=            # Optional: path to custom WebRTC config JSON
       - DEBUG_MODE=false
     ports:
-      - "3000:3000"
+      - "7777:3000"
     restart: unless-stopped
