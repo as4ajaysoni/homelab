@@ -1,0 +1,16 @@
+services:
+  flatnotes:
+    image: dullage/flatnotes:latest
+    container_name: flatnotes
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - FLATNOTES_SECRET_KEY=anyrandomstring   # just for session signing, not a login password
+      - AUTH_TYPE=noauth               # no login screen at all
+      - FLATNOTES_USERNAME=admin     # required by image even when auth is disabled
+      - FLATNOTES_PASSWORD=admin     # not used for login, just satisfies env check
+    ports:
+      - "7200:8080"
+    volumes:
+      - /home/<USER>/docker-data/flatnotes:/app/data # Replace with custom path
