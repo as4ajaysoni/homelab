@@ -1,0 +1,12 @@
+services:
+  dufs:
+    image: sigoden/dufs:latest
+    container_name: dufs
+    ports:
+      - "6075:5000"
+    volumes:
+      - /home/ubuntu/docker-data/dufs-data:/data home/ubuntu/docker-data/duf-data:/data # ensure folder present and correct permission "sudo mkdir -p /home/ubuntu/docker-data/duf-data & sudo chown -R 1000:1000 /home/ubuntu/docker-data/duf-data
+    command: >
+      /data --allow-all
+      # --max-upload-size 1G     # uncomment and set size limit (e.g. 500M, 2G, 10G)
+    restart: unless-stopped
