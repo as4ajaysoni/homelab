@@ -34,6 +34,25 @@ tmpfs   /var/log   tmpfs   defaults,noatime,size=50M   0 0
 > **Warning**: Logs will be lost on reboot. Only use if you don't need persistent logging.
 
 
+## Local File Transfer Tools — Comparison
+
+| | PairDrop | PsiTransfer | dufs |
+|---|---|---|---|
+| **GitHub Stars** | ⭐ ~10k | ⭐ ~1.4k | ⭐ ~9.7k |
+| **Local-only by design** | ❌ has global rooms | ✅ | ✅ |
+| **No login / no auth** | ✅ | ⚠️ needs password for file listing | ✅ |
+| **Persistent file listing** | ❌ | ⚠️ admin password required | ✅ always visible |
+| **Upload & Download** | ✅ | ✅ | ✅ |
+| **Drag & Drop** | ✅ | ✅ | ✅ |
+| **Shareable links** | ✅ | ✅ | ❌ |
+| **Browse folders** | ❌ | ❌ | ✅ |
+| **File size limit option** | ❌ | ✅ | ✅ |
+| **Docker support** | ✅ official | ✅ official | ✅ official |
+| **Best for** | Quick peer-to-peer drops | One-time send with link | Persistent local file server |
+
+---
+
+**Verdict:** For local LAN use with no passwords and persistent file access → **dufs** is the best fit.
 
 
 ## Install Docker
