@@ -1,0 +1,9 @@
+services:
+  psitransfer:
+    image: psitrax/psitransfer:latest
+    container_name: psitransfer
+    ports:
+      - "9510:3000"
+    volumes:
+      - /home/ubuntu/docker-data/psitransfer-data:/data # ensure folder present and correct permission "sudo mkdir -p /home/ubuntu/docker-data/psitransfer-data & sudo chown -R 1000:1000 /home/ubuntu/docker-data/psitransfer-data"
+    restart: unless-stopped
