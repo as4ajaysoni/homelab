@@ -1,0 +1,13 @@
+services:
+  ytdlp-webui:
+    image: ghcr.io/marcopiovanello/yt-dlp-web-ui:latest
+    container_name: ytdlp-webui
+    restart: unless-stopped
+    ports:
+      - "3033:3033"
+    volumes:
+      - /mnt/DRIVE/downloads:/downloads      # Replace path for downloads
+      - /home/USER/docker-data/ytdlp-data:/root/.config/yt-dlp-webui      # # Replace path for config
+
+volumes:
+  ytdlp-data:
